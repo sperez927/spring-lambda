@@ -2,47 +2,52 @@ package com.product.api;
 
 import com.product.api.core.ProductDTO;
 import com.product.api.core.ProductService;
+import javax.validation.Valid;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-
 @RestController
 public class ProductController {
-    private final ProductService productService;
-    private final ApplicationProperties applicationProperties;
 
-    private static final Logger LOG = LogManager.getLogger();
+  private final ProductService productService;
+  private final ApplicationProperties applicationProperties;
 
-    public ProductController(ProductService productService, ApplicationConfiguration configuration) {
-        this.productService = productService;
-        this.applicationProperties = configuration.getApplicationProperties();
-    }
+  private static final Logger LOG = LogManager.getLogger();
 
-    @PostMapping("/product")
-    ResponseEntity<ProductDTO> addProduct(@Valid @RequestBody ProductDTO product) {
-        var createdProduct = productService.CreateProduct(product);
+  public ProductController(
+    ProductService productService,
+    ApplicationConfiguration configuration
+  ) {
+    this.productService = productService;
+    this.applicationProperties = configuration.getApplicationProperties();
+  }
 
-        return ResponseEntity.ok(createdProduct);
-    }
+  @PostMapping("/product")
+  ResponseEntity<ProductDTO> addProduct(
+    @Valid @RequestBody ProductDTO product
+  ) {
+    var createdProduct = productService.CreateProduct(product);
 
-    @GetMapping("/product")
-    ResponseEntity<Iterable<ProductDTO>> listProducts() {
-        LOG.info("Received request to retrieve products");
+    return ResponseEntity.ok(createdProduct);
+  }
 
-        var productList = productService.ListProducts();
+  @GetMapping("/product")
+  ResponseEntity<Iterable<ProductDTO>> listProducts() {
+    LOG.info("Received request to retrieve products");
 
-        LOG.info("Product listing successful");
+    var productList = productService.ListProducts();
 
-        return ResponseEntity.ok(productList);
-    }
+    LOG.info("Product listing successful");
 
-    @GetMapping("/product/{id}")
-    ResponseEntity<ProductDTO> getProduct(@PathVariable long id) {
-        var product = productService.GetProduct(id);
+    return ResponseEntity.ok(productList);
+  }
 
-        return ResponseEntity.ok(product);
-    }
+  @GetMapping("/product/{id}")
+  ResponseEntity<ProductDTO> getProduct(@PathVariable long id) {
+    var product = productService.GetProduct(id);
+
+    return ResponseEntity.ok(product);
+  }
 }

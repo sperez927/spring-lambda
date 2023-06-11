@@ -4,47 +4,47 @@ import software.amazon.awscdk.services.ec2.ISecurityGroup;
 import software.amazon.awscdk.services.ec2.IVpc;
 
 public class DatabaseStackProps {
-    static DatabaseStackProps props;
 
-    private IVpc vpc;
-    private ISecurityGroup applicationSecurityGroup;
+  static DatabaseStackProps props;
 
-    public static DatabaseStackProps builder() {
-        props = new DatabaseStackProps();
+  private IVpc vpc;
+  private ISecurityGroup applicationSecurityGroup;
 
-        return props;
-    }
+  public static DatabaseStackProps builder() {
+    props = new DatabaseStackProps();
 
-    public DatabaseStackProps withVpc(IVpc vpc) {
-        props.setVpc(vpc);
+    return props;
+  }
 
-        return props;
-    }
+  public DatabaseStackProps withVpc(IVpc vpc) {
+    props.setVpc(vpc);
 
-    public DatabaseStackProps withApplicationSecurityGroup(ISecurityGroup sg) {
-        props.setApplicationSecurityGroup(sg);
+    return props;
+  }
 
-        return props;
-    }
+  public DatabaseStackProps withApplicationSecurityGroup(ISecurityGroup sg) {
+    props.setApplicationSecurityGroup(sg);
 
-    public DatabaseStackProps build() {
-        return props;
-    }
+    return props;
+  }
 
-    public IVpc getVpc() {
-        return vpc;
-    }
+  public DatabaseStackProps build() {
+    return props;
+  }
 
-    private void setVpc(IVpc vpc) {
-        this.vpc = vpc;
-    }
+  public IVpc getVpc() {
+    return vpc;
+  }
 
-    public ISecurityGroup getApplicationSecurityGroup()
-    {
-        return applicationSecurityGroup;
-    }
+  private void setVpc(IVpc vpc) {
+    this.vpc = vpc;
+  }
 
-    private void setApplicationSecurityGroup(ISecurityGroup sg) {
-        this.applicationSecurityGroup = sg;
-    }
+  public ISecurityGroup getApplicationSecurityGroup() {
+    return applicationSecurityGroup;
+  }
+
+  private void setApplicationSecurityGroup(ISecurityGroup sg) {
+    this.applicationSecurityGroup = sg;
+  }
 }
